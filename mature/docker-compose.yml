@@ -1,0 +1,44 @@
+# this file can be used to set up a cluster of servers consists of:
+# 1 nginx (receive all requests from client and load balance)
+# 3 server (actual machine who does the work)
+# 1 redis (acts as cache between mongoDB and 3servers)
+
+# how to use:
+# cd to this dir that this file located
+# docker-clean stop: to stop all container
+# docker-compose up --build
+
+nginx:
+  build: ./nginx
+  ports:
+    - "3000:80"
+  links:
+    - "app1:app1"
+    - "app2:app2"
+    - "app3:app3"
+
+# app1 is the container name
+app1:  
+  build: ./app
+  ports:
+    - "3000"
+  links:
+    - "cache:redis"
+
+app2:
+  build: ./app
+  ports:
+    - "3000"
+  links:
+    - "cache:redis"
+
+app3:
+  build: ./app
+  ports:
+    - "3000"
+  links:
+    - "cache:redis"
+
+cache:
+  image: redis  
+# redis will be grab from docker hub

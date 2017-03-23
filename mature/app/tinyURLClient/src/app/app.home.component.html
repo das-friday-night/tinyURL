@@ -1,0 +1,16 @@
+<div class="container">
+  <div class="row">
+    <form class="col-md-8 col-md-offset-2 col-xs-12" role="search" (ngSubmit)="onSubmit()">
+      <div class="form-group">
+        <h4 for="longUrlInput">ENTER LONG URL</h4>
+        <input name="longUrlInput" type="text" class="form-control" [(ngModel)]="url_l"
+               placeholder="long url" required>
+      </div>
+      <button type="submit" class="btn btn-primary">get short url</button>
+    </form>
+  </div>
+</div>
+
+<!--data binding for form:
+    (ngSubmit)="onSubmit()"
+    [(ngModel)]="url_l"    -->
